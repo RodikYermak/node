@@ -1,27 +1,9 @@
-const crypto = require('crypto');
+const http = require('http');
 
-const start = Date.now();
+const PORT = process.env.PORT || 9000;
 
-crypto.pbkdf2('123ttt', '5', 1000000, 64, 'sha512', () => {
-    console.log('1 end', Date.now() - start);
+const server = http.createServer((req, res) => {
+    res.end(req.url);
 });
 
-crypto.pbkdf2('123ttt', '5', 1000000, 64, 'sha512', () => {
-    console.log('2 end', Date.now() - start);
-});
-
-crypto.pbkdf2('123ttt', '5', 1000000, 64, 'sha512', () => {
-    console.log('3 end', Date.now() - start);
-});
-
-crypto.pbkdf2('123ttt', '5', 1000000, 64, 'sha512', () => {
-    console.log('4 end', Date.now() - start);
-});
-
-crypto.pbkdf2('123ttt', '5', 1000000, 64, 'sha512', () => {
-    console.log('5 end', Date.now() - start);
-});
-
-console.log(start);
-
-console.log(process.pid);
+server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
